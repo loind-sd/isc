@@ -20,6 +20,20 @@ public class Product {
     private int status;
     private String imageLink;
     private String note;
+    private int sellBy;
+
+    public Product(int id, String name, int categoryId, double price, String description, int quantity, int status, String imageLink, String note, int sellBy) {
+        this.id = id;
+        this.name = name;
+        this.categoryId = categoryId;
+        this.price = price;
+        this.description = description;
+        this.quantity = quantity;
+        this.status = status;
+        this.imageLink = imageLink;
+        this.note = note;
+        this.sellBy = sellBy;
+    }
 
     public Product(String name, int categoryId, double price, String description, int quantity, int status, String imageLink, String note) {
         this.name = name;
@@ -43,6 +57,16 @@ public class Product {
         this.imageLink = imageLink;
         this.note = note;
     }
+
+    public int getSellBy() {
+        return sellBy;
+    }
+
+    public void setSellBy(int sellBy) {
+        this.sellBy = sellBy;
+    }
+    
+    
 
     public int getId() {
         return id;

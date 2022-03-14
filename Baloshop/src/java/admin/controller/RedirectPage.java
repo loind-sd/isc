@@ -64,13 +64,21 @@ public class RedirectPage extends HttpServlet {
                     request.getRequestDispatcher("admin-index.jsp").forward(request, response);
                     break;
                 case 3:
-                    ArrayList<Product> listProduct = new ProductModel().getAllProduct();
+                    ArrayList<Product> listProduct = null;
+                    
+                    if (account.getRoleId() == 1) {
+                        listProduct = new ProductModel().getAllProduct();
+                    } 
+                    else if (account.getRoleId() == 4) {
+                        listProduct = new ProductModel().getProductsBySeller(account.getId());
+                    }
                     ArrayList<Category> listCategory = new CategoryModel().getAllCategory();
                     request.setAttribute("page", 3);
                     request.setAttribute("products", listProduct);
                     request.setAttribute("categories", listCategory);
                     request.getRequestDispatcher("admin-index.jsp").forward(request, response);
                     break;
+
                 case 4:
                     ArrayList<Order> listOrder = new OrderModel().getOrder();
                     request.setAttribute("page", 4);

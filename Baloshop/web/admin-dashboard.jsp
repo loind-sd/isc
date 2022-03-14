@@ -31,7 +31,15 @@
                     </tr>
                     <tr>
                         <td>Loại tài khoản:</td>
-                        <td>${currentLoginAccount.roleId == 1 ? "Admin" : "Khách hàng"}</td>
+                        <c:if test="${currentLoginAccount.roleId eq 1}">
+                            <td>Admin</td>
+                        </c:if>
+                        <c:if test="${currentLoginAccount.roleId eq 2}">
+                            <td>Khách hàng</td>
+                        </c:if>
+                        <c:if test="${currentLoginAccount.roleId eq 4}">
+                            <td>Người bán</td>
+                        </c:if>
                     </tr>
                     <tr>
                         <td>Trạng thái:</td>

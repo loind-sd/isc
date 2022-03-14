@@ -18,7 +18,7 @@
                 <ul class="navbar-nav">
                     <form class="form-inline mr-3" action="search" method="get">
                         <div class="input-group">
-                            <input type="text" class="form-control" name="txtSearch" placeholder="Tìm kiếm">
+                            <input type="text" class="form-control" name="txtSearch" placeholder="Tìm kiếm" value="${txtSearch}">
                             <div class="input-group-append">
                                 <button type="submit" name="btn-search" class="input-group-text">Tìm kiếm</button>
                             </div>

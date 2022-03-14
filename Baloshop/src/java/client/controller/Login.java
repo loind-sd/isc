@@ -45,7 +45,7 @@ public class Login extends HttpServlet {
             if (accountLogin != null) {
                 HttpSession session = request.getSession();
                 session.setAttribute("currentLoginAccount", accountLogin);
-                if (accountLogin.getRoleId() == 1) {
+                if (accountLogin.getRoleId() != 2) {
                     response.sendRedirect("admin-index.jsp");
                 } else {
                     response.sendRedirect("products.jsp");

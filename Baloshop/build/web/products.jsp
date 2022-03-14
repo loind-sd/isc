@@ -122,7 +122,9 @@
                                                 </div>
                                             </c:if>
                                             <div class="img">
-                                                <img src="assets/images/products/${i.imageLink}" alt="${i.imageLink}">
+                                                <a href="/BaloShop/product?id=${i.id}">
+                                                    <img src="assets/images/products/${i.imageLink}" alt="${i.imageLink}">
+                                                </a>
                                                 <div class="overlay">
                                                     <p>
                                                         <a href="addtocart?id=${i.id}">

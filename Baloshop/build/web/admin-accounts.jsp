@@ -32,7 +32,15 @@
                     <tr>
                         <td>${no.index+1}</td>
                         <td>${i.email}</td>
-                        <td>${i.roleId == 1 ? "Admin" : "Khách hàng"}</td>
+                        <c:if test="${i.roleId eq 1}">
+                            <td>Admin</td>
+                        </c:if>
+                        <c:if test="${i.roleId eq 2}">
+                            <td>Khách hàng</td>
+                        </c:if>
+                        <c:if test="${i.roleId eq 4}">
+                            <td>Người bán</td>
+                        </c:if>
                         <td>
                             <c:if test="${i.status == 1}">
                                 <span class="active">Đang hoạt động</span>
@@ -63,7 +71,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                ...
+                ... 
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-success btn-sm" data-dismiss="modal">Cập nhật thông tin</button>

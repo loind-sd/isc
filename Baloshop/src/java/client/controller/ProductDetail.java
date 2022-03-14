@@ -5,6 +5,7 @@
  */
 package client.controller;
 
+import entity.AccountDetail;
 import entity.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,6 +14,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.AccountDetailModel;
+import model.AccountModel;
 import model.ProductModel;
 
 /**
@@ -41,8 +44,11 @@ public class ProductDetail extends HttpServlet {
             int id = Integer.valueOf(request.getParameter("id"));
 
             Product product = new ProductModel().getOneProduct(id);
-
+            int sellBy = new AccountModel().getOneAccount(product.getSellBy()).getAccountDetailId();
+            String sellName = new AccountDetailModel().getOneAccountDetail(sellBy).getName();
+            
             request.setAttribute("product", product);
+            request.setAttribute("sellName", sellName);
             request.getRequestDispatcher("product-detail.jsp").forward(request, response);
         }
     }

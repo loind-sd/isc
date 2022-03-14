@@ -45,21 +45,31 @@
                                                 <i class="mr-2"></i> Thông tin cá nhân
                                             </a>
                                         </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="redirectpage?page=2">
-                                                <i class="mr-2"></i> Quản lý tài khoản
-                                            </a>
+                                        <c:if test="${currentLoginAccount.roleId eq 1}">
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="redirectpage?page=2">
+                                                    <i class="mr-2"></i> Quản lý tài khoản
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="redirectpage?page=3">
+                                                    <i class="mr-2"></i> Quản lý sản phẩm
+                                                </a>
+                                            </li>
+                                        </c:if>
+                                            
+                                        <c:if test="${currentLoginAccount.roleId eq 4}">
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="redirectpage?page=3">
+                                                    <i class="mr-2"></i> Sản phẩm của tôi
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="redirectpage?page=4">
+                                                    <i class="mr-2"></i> Quản lý đơn hàng (coming soon)
+                                                </a>
                                         </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="redirectpage?page=3">
-                                                <i class="mr-2"></i> Quản lý sản phẩm
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="redirectpage?page=4">
-                                                <i class="mr-2"></i> Quản lý đơn hàng (coming soon)
-                                            </a>
-                                        </li>
+                                        </c:if>
                                     </ul>
                                 </div>
                             </div>

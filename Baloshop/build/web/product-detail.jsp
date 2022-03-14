@@ -47,6 +47,7 @@
                                     <span class="badge badge-success mg-left-10">SALE</span>
                                 </c:if>
                             </p>
+                            <p><span>Người bán: ${sellName}</span></p>
                             <a href="products.jsp" class="go-back">Trở về</a>
                             <a href="addtocart?pid=${product.id}" class="btn-add-to-cart">
                                 <i class="fas fa-cart-plus fa-fw fa-lg mg-right-5"></i> Thêm vào giỏ hàng

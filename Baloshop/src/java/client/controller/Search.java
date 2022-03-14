@@ -55,6 +55,7 @@ public class Search extends HttpServlet {
             // response
             if (listProduct != null) {
                 request.setAttribute("listProduct", listProduct);
+                request.setAttribute("txtSearch", text);
                 request.getRequestDispatcher("products.jsp").forward(request, response);
             } else {
                 request.setAttribute("listProduct", null);
