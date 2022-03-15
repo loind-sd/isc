@@ -64,7 +64,7 @@
                                                 <td>${i.id}</td>
                                                 <td>${i.fmDate}</td>
                                                 <td><fmt:formatNumber type="number" maxFractionDigits="3" value="${i.totalPrice}"/><sup>đ</sup></td>
-                                                <td>${i.status == 1 ? "Đang xử lý" : i.status == 2 ? "Đang giao hàng" : i.status == 3 ? "Giao hàng thành công" : i.status == 4 ? "Đang hủy đơn hàng" : "Đã hủy bỏ"}</td>
+                                                <td>${i.status == 4 ? "Đã giao hàng" : i.status == 6 ? "Đã trả lại hàng":"Đã hủy đơn hàng"}</td>
                                                 <td>${i.note == null ? "--" : i.note}</td>
                                                 <td><a href="#" class="g-color">Chi tiết</a></td>
                                             </tr>

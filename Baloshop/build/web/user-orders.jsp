@@ -68,15 +68,33 @@
                                                 <td><fmt:formatNumber type="number" maxFractionDigits="3" value="${i.totalPrice}"/><sup>đ</sup></td>
                                                 <td class="text-center">
                                                     <c:if test="${i.status == 1}">
-                                                        <span class="active">Đang xử lý</span>
+                                                        <span class="active">Chờ xác nhận</span>
                                                     </c:if>
                                                     <c:if test="${i.status == 2}">
+                                                        <span class="active">Đang chuẩn bị hàng</span>
+                                                    </c:if>
+
+                                                    <c:if test="${i.status == 3}">
                                                         <span class="active">Đang giao hàng</span>
                                                     </c:if>
+
                                                     <c:if test="${i.status == 4}">
-                                                        <span class="deactiveactive">Đang hủy đơn hàng</span>                                                    </c:if>   
-                                                    </td>
-                                                    <td>${i.note == null ? "--" : i.note}</td>
+                                                        <span class="active">Đã giao hàng</span>
+                                                    </c:if>
+
+                                                    <c:if test="${i.status == 5}">
+                                                        <span class="active">Đang hoàn trả hàng</span>
+                                                    </c:if>
+
+                                                    <c:if test="${i.status == 6}">
+                                                        <span class="active">Đã hoàn trả hàng</span>
+                                                    </c:if>
+
+                                                    <c:if test="${i.status == -1}">
+                                                        <span class="deactiveactive">Đã hủy đơn hàng</span>                                                   
+                                                    </c:if>  
+                                                </td>
+                                                <td>${i.note == null ? "--" : i.note}</td>
                                                 <td><a href="orders?id=${i.id}" class="g-color">Chi tiết</a></td>
                                             </tr>
                                         </c:forEach>

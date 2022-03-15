@@ -189,8 +189,8 @@ public class ProductModel {
 
     public boolean addProduct(Product p) {
         int isCheck = 0;
-        String query = "INSERT INTO Products(Name, Category_Id, Price, Description, Quantity, Status, Image_Link, Note) "
-                + "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO Products(Name, Category_Id, Price, Description, Quantity, Status, Image_Link, Note, SellBy) "
+                + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             connection = MSSQLConnection.getConnection();
             ps = connection.prepareStatement(query);
@@ -202,6 +202,7 @@ public class ProductModel {
             ps.setInt(6, p.getStatus());
             ps.setString(7, p.getImageLink());
             ps.setString(8, p.getNote());
+            ps.setInt(9, p.getSellBy());
             isCheck = ps.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);

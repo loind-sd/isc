@@ -58,6 +58,20 @@ public class Product {
         this.note = note;
     }
 
+    public Product(String name, int categoryId, double price, String description, int quantity, int status, String imageLink, String note, int sellBy) {
+        this.name = name;
+        this.categoryId = categoryId;
+        this.price = price;
+        this.description = description;
+        this.quantity = quantity;
+        this.status = status;
+        this.imageLink = imageLink;
+        this.note = note;
+        this.sellBy = sellBy;
+    }
+    
+    
+
     public int getSellBy() {
         return sellBy;
     }

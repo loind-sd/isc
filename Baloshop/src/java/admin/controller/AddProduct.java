@@ -5,6 +5,7 @@
  */
 package admin.controller;
 
+import entity.Account;
 import entity.Category;
 import entity.Product;
 import java.io.File;
@@ -20,6 +21,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.CategoryModel;
 import model.ProductModel;
 import org.apache.commons.fileupload.FileItem;
@@ -49,6 +51,10 @@ public class AddProduct extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         response.setCharacterEncoding("UTF-8");
         request.setCharacterEncoding("UTF-8");
+        
+        HttpSession session = request.getSession();
+        Account account = (Account) session.getAttribute("currentLoginAccount");
+        
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             boolean isMultiPart = ServletFileUpload.isMultipartContent(request);
@@ -95,8 +101,9 @@ public class AddProduct extends HttpServlet {
                 int quantity = Integer.valueOf((String) params.get("quantity"));
                 int status = Integer.valueOf((String) params.get("status"));
                 String description = (String) params.get("description");
+                int sellBy = account.getId();
 
-                Product p = new Product(name, categoryId, price, description, quantity, status, fileName, null);
+                Product p = new Product(name, categoryId, price, description, quantity, status, fileName, null, sellBy);
                 boolean isCheck = new ProductModel().addProduct(p);
                 if (isCheck) {
                     ArrayList<Product> listProduct = new ProductModel().getAllProduct();

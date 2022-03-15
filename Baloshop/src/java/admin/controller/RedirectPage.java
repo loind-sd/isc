@@ -81,6 +81,15 @@ public class RedirectPage extends HttpServlet {
 
                 case 4:
                     ArrayList<Order> listOrder = new OrderModel().getOrder();
+                    ArrayList<OrderDetail> listOrderDetail = null;
+                    try {
+                        listOrderDetail = (ArrayList<OrderDetail>) request.getAttribute("listOrderDetail");
+                    } catch (Exception e) {
+                    }
+                    if (account.getRoleId() == 4) {
+                        listOrder = new OrderModel().getOrderForSeller(account.getId());
+                    }
+                    request.setAttribute("listOrderDetail", listOrderDetail);
                     request.setAttribute("page", 4);
                     request.setAttribute("listOrder", listOrder);
                     request.getRequestDispatcher("admin-index.jsp").forward(request, response);

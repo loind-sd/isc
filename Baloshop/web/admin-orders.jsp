@@ -4,6 +4,7 @@
     Author     : Shado
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <div class="right-side mb-5">
@@ -27,32 +28,82 @@
                         <th>Địa chỉ người nhận</th>
                         <th>Giá trị</th>
                         <th>Trạng thái</th>
-                        
+                        <th>Chức năng</th>
+                        <th>Chi tiết</th>
+
                     </tr>
                 </thead>
                 <tbody>
-                <c:forEach items="${listOrder}" var="i" varStatus="no">
-                    <tr>
-                        <td>${no.index+1}</td>
-                        <td>${i.id}</td>
-                        <td>${accountDetailInfo.name}</td>
-                        <td>${accountDetailInfo.mobile}</td>
-                        <td>${accountDetailInfo.address}</td>
-                        <td><fmt:formatNumber type="number" maxFractionDigits="3" value="${i.totalPrice}"/><sup>đ</sup></td>
-                    <td class="text-center">
-                        
+                    <c:forEach items="${listOrder}" var="i" varStatus="no">
+                        <tr>
+                            <td>${no.index+1}</td>
+                            <td>${i.id}</td>
+                            <td>Trần Văn Bình</td>
+                            <td>01646352891</td>
+                            <td>44 Nguyễn Văn Cừ, Phường Ngọc Lâm, Quận Long Biên, Hà Nội</td>
+                            <td><fmt:formatNumber type="number" maxFractionDigits="3" value="${i.totalPrice}"/><sup>đ</sup></td>
 
-                    <c:if test="${i.status == 1}">
-                        <span class="active">Đang xử lý</span>
+
+                    <c:if test="${currentLoginAccount.roleId eq 1}">
+                        <c:if test="${i.status == 1}">
+                            <td class="text-center">
+                                <span class="active">Chờ xác nhận</span>
+                            </td>
+                            <td>
+                                <a class="nav-link" href="confirmOrder?id=${i.id}">Xác nhận</a>
+                            </td>
+                        </c:if> 
+                        <c:if test="${i.status != 1}">
+                            <td class="text-center">
+                                <span class="active">Đã xác nhận</span>
+                            </td>
+                            <td></td>
+                        </c:if> 
                     </c:if>
-                    <c:if test="${i.status == 2}">
-                        <span class="active">Đang giao hàng</span>
+
+                    <c:if test="${currentLoginAccount.roleId eq 4}">
+                        <td class="text-center">
+                            <c:if test="${i.status == 2}">
+                                <span class="active">Đang chuẩn bị hàng</span>
+                            </c:if>
+
+                            <c:if test="${i.status == 3}">
+                                <span class="active">Đang giao hàng</span>
+                            </c:if>
+
+                            <c:if test="${i.status == 4}">
+                                <span class="active">Đã giao hàng</span>
+                            </td>
+                            <td>
+                            </c:if>
+
+                            <c:if test="${i.status == 5}">
+                                <span class="active">Đang hoàn trả hàng</span>
+                            </c:if>
+
+                            <c:if test="${i.status == 6}">
+                                <span class="active">Đã hoàn trả hàng</span>
+                            </td>
+                            <td>
+                            </c:if>
+
+                            <c:if test="${i.status == -1}">
+                                <span class="deactiveactive">Đã hủy đơn hàng</span>                                                   
+                            </c:if> 
+                        </td>
+
+                        <c:if test="${i.status != -1}">
+                            <c:if test="${i.status != 6}">
+                                <c:if test="${i.status != 4}">
+                                    <td>
+                                        <a class="nav-link" href="confirmOrder?id=${i.id}&status=${i.status + 1}">Xong</a>
+                                    </td>
+                                </c:if>
+                            </c:if>
+                        </c:if>
                     </c:if>
-                    <c:if test="${i.status == 4}">
-                        <span class="deactiveactive">Đang hủy đơn hàng</span>                                                   
-                    </c:if>   
-                    </td>
-                    
+
+                    <td><a href="orders?id=${i.id}&flag=1" class="g-color">Chi tiết</a></td>
                     </tr>
                 </c:forEach>
                 </tbody>
