@@ -17,12 +17,21 @@ public class Order {
     private double totalPrice;
     private String note;
     private int status;
+    private int sellBy;
 
     public Order(int accountId, double totalPrice, String note, int status) {
         this.accountId = accountId;
         this.totalPrice = totalPrice;
         this.note = note;
         this.status = status;
+    }
+    
+    public Order(int accountId, double totalPrice, String note, int status, int sellBy) {
+        this.accountId = accountId;
+        this.totalPrice = totalPrice;
+        this.note = note;
+        this.status = status;
+        this.sellBy = sellBy;
     }
 
     public Order(int id, int accountId, String date, double totalPrice, String note, int status) {
@@ -33,6 +42,19 @@ public class Order {
         this.note = note;
         this.status = status;
     }
+
+    public Order() {
+    }
+
+    public int getSellBy() {
+        return sellBy;
+    }
+
+    public void setSellBy(int sellBy) {
+        this.sellBy = sellBy;
+    }
+    
+    
 
     public int getId() {
         return id;

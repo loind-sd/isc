@@ -12,7 +12,10 @@ import entity.Order;
 import entity.OtherAddress;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -54,38 +57,58 @@ public class CheckOut extends HttpServlet {
             HttpSession session = request.getSession();
             Account account = (Account) session.getAttribute("currentLoginAccount");
             List<Cart> listOrder = (List<Cart>) session.getAttribute("listCart");
-            double totalPrice = (double) session.getAttribute("totalPrice");
 
-            Order order = new Order(account.getId(), totalPrice, note, 1);
-            int orderId = new OrderModel().addOrder(order);
+            Map<Integer, List<Cart>> map = new HashMap<>();
+            listOrder.forEach(cart -> {
+                if (map.containsKey(cart.getSellBy())) {
+                    map.get(cart.getSellBy()).add(cart);
+                } else {
+                    List<Cart> carts = new ArrayList<>();
+                    carts.add(cart);
+                    map.put(cart.getSellBy(), carts);
+                }
+            });
 
-            if (orderId > 0) {
-                boolean isCheckAddOrderDetail = new OrderDetailModel().addOrderDetail(listOrder, orderId);
-                if (isCheckAddOrderDetail) {
-                    boolean isCheckUpdateProductQuantity = new ProductModel().updateQuantityProduct(listOrder);
+            for (Map.Entry<Integer, List<Cart>> entry : map.entrySet()) {
+                int key = entry.getKey();
+                List<Cart> value = entry.getValue();
+                double totalPrice = 0;
 
-                    if (isCheckUpdateProductQuantity) {
-                        AccountDetail accountDetail = new AccountDetailModel().getOneAccountDetail(account.getAccountDetailId());
-                        OtherAddress otherAddress;
-                        if (btnUpdate == null) {
-                            otherAddress = new OtherAddress(accountDetail.getName(), accountDetail.getMobile(), accountDetail.getAddress(), orderId);
-                        } else {
-                            String name = request.getParameter("name");
-                            String mobile = request.getParameter("mobile");
-                            String address = request.getParameter("address");
-                            otherAddress = new OtherAddress(name, mobile, address, orderId);
-                        }
-                        boolean isCheckAddAddress = new OtherAddressModel().addOtherAddress(otherAddress);
-                        if (isCheckAddAddress) {
-                            session.removeAttribute("listCart");
-                            session.removeAttribute("totalPrice");
-                            response.sendRedirect("thanks.jsp");
+                for (Cart c : value) {
+                    double temp = c.getQuantity() * c.getUnitPrice();
+                    totalPrice += temp;
+                }
+
+                Order order = new Order(account.getId(), totalPrice, note, 1, key);
+                int orderId = new OrderModel().addOrder(order);
+
+                if (orderId > 0) {
+                    boolean isCheckAddOrderDetail = new OrderDetailModel().addOrderDetail(value, orderId);
+                    if (isCheckAddOrderDetail) {
+                        boolean isCheckUpdateProductQuantity = new ProductModel().updateQuantityProduct(value);
+
+                        if (isCheckUpdateProductQuantity) {
+                            AccountDetail accountDetail = new AccountDetailModel().getOneAccountDetail(account.getAccountDetailId());
+                            OtherAddress otherAddress;
+                            if (btnUpdate == null) {
+                                otherAddress = new OtherAddress(accountDetail.getName(), accountDetail.getMobile(), accountDetail.getAddress(), orderId);
+                            } else {
+                                String name = request.getParameter("name");
+                                String mobile = request.getParameter("mobile");
+                                String address = request.getParameter("address");
+                                otherAddress = new OtherAddress(name, mobile, address, orderId);
+                            }
+                            boolean isCheckAddAddress = new OtherAddressModel().addOtherAddress(otherAddress);
                         }
                     }
+                } else {
+                    response.sendRedirect("checkout.jsp");
                 }
-            } else {
-                response.sendRedirect("checkout.jsp");
             }
+
+            session.removeAttribute("listCart");
+            session.removeAttribute("totalPrice");
+            response.sendRedirect("thanks.jsp");
         }
     }
 

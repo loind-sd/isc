@@ -56,7 +56,7 @@ public class AddToCart extends HttpServlet {
             }
 
             Product product = new ProductModel().getOneProduct(id);
-            Cart cart = new Cart(id, product.getName(), product.getPrice(), 1);
+            Cart cart = new Cart(id, product.getName(), product.getPrice(), 1, product.getSellBy());
 
             HttpSession session = request.getSession();
             List<Cart> listOrder = null;

@@ -87,12 +87,14 @@
                             <td>
                             </c:if>
 
-                            <c:if test="${i.status == -1}">
-                                <span class="deactiveactive">Đã hủy đơn hàng</span>                                                   
+                            <c:if test="${i.status == 7}">
+                                <span class="deactiveactive">Đã hủy đơn hàng</span>  
+                            </td>
+                            <td>
                             </c:if> 
                         </td>
 
-                        <c:if test="${i.status != -1}">
+                        <c:if test="${i.status != 7}">
                             <c:if test="${i.status != 6}">
                                 <c:if test="${i.status != 4}">
                                     <td>

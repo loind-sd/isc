@@ -26,7 +26,7 @@ public class OrderModel {
     private ResultSet rs = null;
 
     public int addOrder(Order order) {
-        String query = "INSERT INTO [Order](Account_Id, Total_Price, Note, Status) VALUES(?, ?, ?, ?)";
+        String query = "INSERT INTO [Order](Account_Id, Total_Price, Note, Status, SellBy) VALUES(?, ?, ?, ?, ?)";
         try {
             connection = MSSQLConnection.getConnection();
             ps = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -34,6 +34,7 @@ public class OrderModel {
             ps.setDouble(2, order.getTotalPrice());
             ps.setString(3, order.getNote());
             ps.setInt(4, order.getStatus());
+            ps.setInt(5, order.getSellBy());
             int isCheck = ps.executeUpdate();
             if (isCheck > 0) {
                 rs = ps.getGeneratedKeys();
@@ -100,11 +101,9 @@ public class OrderModel {
         return null;
     }
     
-    
-    
     public ArrayList<Order> getOrder(){
         ArrayList<Order> list = new ArrayList<>();
-        String query = "SELECT * FROM [Order] ";
+        String query = "SELECT * FROM [Order] order by status";
         try {
             connection = MSSQLConnection.getConnection();
             ps = connection.prepareStatement(query);

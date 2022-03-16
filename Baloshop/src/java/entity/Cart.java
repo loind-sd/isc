@@ -15,6 +15,7 @@ public class Cart {
     private String name;
     private double unitPrice;
     private int quantity;
+    private int sellBy;
 
     public Cart() {
     }
@@ -25,6 +26,24 @@ public class Cart {
         this.unitPrice = unitPrice;
         this.quantity = quantity;
     }
+
+    public Cart(int productId, String name, double unitPrice, int quantity, int sellBy) {
+        this.productId = productId;
+        this.name = name;
+        this.unitPrice = unitPrice;
+        this.quantity = quantity;
+        this.sellBy = sellBy;
+    }
+
+    public int getSellBy() {
+        return sellBy;
+    }
+
+    public void setSellBy(int sellBy) {
+        this.sellBy = sellBy;
+    }
+    
+    
 
     public int getProductId() {
         return productId;
