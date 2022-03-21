@@ -24,7 +24,7 @@
                         <th>Email</th>
                         <th>Loại</th>
                         <th>Trạng thái</th>
-                        <th>Chi tiết</th>
+                        <!--<th>Chi tiết</th>-->
                     </tr>
                 </thead>
                 <tbody>
@@ -49,9 +49,9 @@
                                 <span class="deactive">Ngừng hoạt động</span>
                             </c:if>
                         </td>
-                        <td>
+<!--                        <td>
                             <a href="#" data-toggle="modal" data-target="#myModal" class="g-color">Chi tiết</a>
-                        </td>
+                        </td>-->
                     </tr>
                 </c:forEach>
                 </tbody>

@@ -213,6 +213,43 @@ public class ProductModel {
         }
         return isCheck > 0;
     }
+    
+    public boolean updateProduct(Product p) {
+        String query = "UPDATE Products SET "
+                + "Name = ? ,"
+                + "Category_Id = ? ,"
+                + "Price = ? ,"
+                + "Description = ? ,"
+                + "Quantity = ? ,"
+                + "Status = ? ,"
+                + "Image_Link = ? "
+                + " WHERE Id = ?";
+        try {
+            connection = MSSQLConnection.getConnection();
+            ps = connection.prepareStatement(query);
+            connection.setAutoCommit(false);
+            
+            ps.setString(1, p.getName());
+            ps.setInt(2, p.getCategoryId());
+            ps.setDouble(3, p.getPrice());
+            ps.setString(4, p.getDescription());
+            ps.setInt(5, p.getQuantity());
+            ps.setInt(6, p.getStatus());
+            ps.setString(7, p.getImageLink());
+            ps.setInt(8, p.getId());
+
+            ps.executeUpdate();
+            connection.commit();
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            MSSQLConnection.closeResultSet(rs);
+            MSSQLConnection.closePreparedStatement(ps);
+            MSSQLConnection.closeConnection(connection);
+        }
+        return false;
+    }
 
     public boolean updateQuantityProduct(List<Cart> list) {
         String query = "UPDATE Products SET Quantity = ? WHERE Id = ?";

@@ -17,12 +17,12 @@ import java.sql.SQLException;
  */
 public class MSSQLConnection {
 
-    public static final String HOSTNAME = "localhost";
+    public static final String HOSTNAME = "DESKTOP-HPR689C\\SQLEXPRESS";
     public static final String PORT = "1433";
     public static final String DBNAME = "baloshop";
     public static final String INTEGRATED_SECURITY = "false";
     public static final String USERNAME = "sa";
-    public static final String PASSWORD = "mothernumber1@";
+    public static final String PASSWORD = "123";
 
     /**
      * Get connection to MSSQL Server

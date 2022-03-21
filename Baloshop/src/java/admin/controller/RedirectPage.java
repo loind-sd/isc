@@ -72,6 +72,10 @@ public class RedirectPage extends HttpServlet {
                     else if (account.getRoleId() == 4) {
                         listProduct = new ProductModel().getProductsBySeller(account.getId());
                     }
+                    if(request.getParameter("idProduct") != null){
+                        Product p = new ProductModel().getOneProduct(Integer.valueOf(request.getParameter("idProduct")));
+                        request.setAttribute("productDetail", p);
+                    }
                     ArrayList<Category> listCategory = new CategoryModel().getAllCategory();
                     request.setAttribute("page", 3);
                     request.setAttribute("products", listProduct);
@@ -92,6 +96,14 @@ public class RedirectPage extends HttpServlet {
                     request.setAttribute("listOrderDetail", listOrderDetail);
                     request.setAttribute("page", 4);
                     request.setAttribute("listOrder", listOrder);
+                    request.getRequestDispatcher("admin-index.jsp").forward(request, response);
+                    break;
+                    
+                case 5:
+                    ArrayList<Category> listCategoryy = new CategoryModel().getAllCategory();
+                    request.setAttribute("page", 5);
+//                    request.setAttribute("products", listProduct);
+                    request.setAttribute("categories", listCategoryy);
                     request.getRequestDispatcher("admin-index.jsp").forward(request, response);
                     break;
                 default:

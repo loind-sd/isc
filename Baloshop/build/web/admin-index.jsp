@@ -60,6 +60,11 @@
 
                                         <c:if test="${currentLoginAccount.roleId eq 4}">
                                             <li class="nav-item">
+                                                <a class="nav-link" href="redirectpage?page=5">
+                                                    <i class="mr-2">Loại hàng của tôi</i>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
                                                 <a class="nav-link" href="redirectpage?page=3">
                                                     <i class="mr-2">Sản phẩm của tôi</i> 
                                                 </a>
@@ -88,6 +93,9 @@
                     </c:if>
                     <c:if test="${page == 4}">
                         <%@include file="admin-orders.jsp"%>
+                    </c:if>
+                    <c:if test="${page == 5}">
+                        <%@include file="admin-category.jsp"%>
                     </c:if>
                 </div>
             </div>
@@ -119,6 +127,14 @@
                 });
             </script>
             <%@include file="user-modal-order-detail.jsp"%>
+        </c:if>
+        <c:if test="${productDetail ne null}">
+            <script>
+                $(document).ready(function () {
+                    $('#myModal').modal('show');
+                });
+            </script>
+            <%@include file="manageProduct_detail.jsp"%>
         </c:if>
     </body>
 </html>

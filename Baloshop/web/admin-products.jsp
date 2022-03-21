@@ -102,8 +102,9 @@
                         <td><fmt:formatNumber type="number" maxFractionDigits="3" value="${i.price}"/><sup>đ</sup></td>
                         <td>${i.status == 1 ? "Còn hàng" : i.status == 2 ? "Giảm giá" : "Hết hàng"}</td>
                         <td>
-                            <a href="#" data-toggle="modal" data-target="#myModal" class="g-color">Chi tiết</a>
+                            <a href="redirectpage?page=3&idProduct=${i.id}" class="g-color">Chi tiết</a>
                         </td>
+                        <!--data-toggle="modal" data-target="#myModal"--> 
                     </tr>
                 </c:forEach>
                 </tbody>

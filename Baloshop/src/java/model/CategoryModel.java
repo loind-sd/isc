@@ -5,6 +5,7 @@
  */
 package model;
 
+import entity.Account;
 import jdbc.MSSQLConnection;
 import entity.Category;
 import java.sql.Connection;
@@ -72,11 +73,25 @@ public class CategoryModel {
         return null;
     }
 
-    public boolean addCategory(Category obj) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
     public boolean updateCategory(Category obj, int id) {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
+    public boolean addCategory(Category c) {
+        int isCheck = 0;
+        String query = "INSERT INTO Categories(category) VALUES(?)";
+        try {
+            connection = MSSQLConnection.getConnection();
+            ps = connection.prepareStatement(query);
+            ps.setString(1, c.getCategory());
+            isCheck = ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            MSSQLConnection.closeResultSet(rs);
+            MSSQLConnection.closePreparedStatement(ps);
+            MSSQLConnection.closeConnection(connection);
+        }
+        return isCheck > 0;
     }
 }
