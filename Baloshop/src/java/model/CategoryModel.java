@@ -73,8 +73,23 @@ public class CategoryModel {
         return null;
     }
 
-    public boolean updateCategory(Category obj, int id) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public boolean updateCategory(Category c, int id) {
+        int isCheck = 0;
+        String query = "UPDATE Categories SET category = ? WHERE id = ?";
+        try {
+            connection = MSSQLConnection.getConnection();
+            ps = connection.prepareStatement(query);
+            ps.setString(1, c.getCategory());
+            ps.setInt(2, id);
+            isCheck = ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            MSSQLConnection.closeResultSet(rs);
+            MSSQLConnection.closePreparedStatement(ps);
+            MSSQLConnection.closeConnection(connection);
+        }
+        return isCheck > 0;
     }
     
     public boolean addCategory(Category c) {

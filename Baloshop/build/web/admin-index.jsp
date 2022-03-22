@@ -51,6 +51,13 @@
                                                     <i class="mr-2">Quản lý tài khoản</i> 
                                                 </a>
                                             </li>
+                                            
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="redirectpage?page=5">
+                                                    <i class="mr-2">Quản lý loại hàng</i>
+                                                </a>
+                                            </li>
+                                            
                                             <li class="nav-item">
                                                 <a class="nav-link" href="redirectpage?page=4">
                                                     <i class="mr-2">Quản lý đơn hàng</i> 
@@ -59,11 +66,6 @@
                                         </c:if>
 
                                         <c:if test="${currentLoginAccount.roleId eq 4}">
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="redirectpage?page=5">
-                                                    <i class="mr-2">Loại hàng của tôi</i>
-                                                </a>
-                                            </li>
                                             <li class="nav-item">
                                                 <a class="nav-link" href="redirectpage?page=3">
                                                     <i class="mr-2">Sản phẩm của tôi</i> 

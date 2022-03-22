@@ -145,7 +145,7 @@
                                 <div class="collapse mb-2" id="updateInfo">
                                     <div class="card">
                                         <div class="card-body">
-                                            <form action="" method="post">
+                                            <form action="#" method="post">
                                                 <div class="form-group col-md-6">
                                                     <input type="text" class="form-control" name="name" placeholder="Họ và tên">
                                                 </div>
@@ -165,7 +165,7 @@
                                                 <div class="form-group col-md-12">
                                                     <textarea class="form-control" rows="3" name="address" placeholder="Địa chỉ"></textarea>
                                                 </div>
-                                                <input type="submit" class="btn btn-success btn-sm ml-3" name="btnUpload" value="Xác nhận">
+                                                <input type="button" class="btn btn-success btn-sm ml-3" name="btnUpload" value="Xác nhận">
                                             </form>
                                         </div>
                                     </div>

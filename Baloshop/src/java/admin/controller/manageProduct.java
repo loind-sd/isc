@@ -34,7 +34,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
  * @author 19longdt
  */
 @WebServlet(name = "manageProduct", urlPatterns = {"/manageProduct"})
-public class manageProduct extends HttpServlet {
+public class ManageProduct extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

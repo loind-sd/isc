@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.AccountDetailModel;
+import model.AccountModel;
 import model.ProductModel;
 import utils.NumberUtil;
 
@@ -56,6 +58,9 @@ public class AddToCart extends HttpServlet {
             }
 
             Product product = new ProductModel().getOneProduct(id);
+            
+            int sellBy = new AccountModel().getOneAccount(product.getSellBy()).getAccountDetailId();
+            String sellName = new AccountDetailModel().getOneAccountDetail(sellBy).getName();
             Cart cart = new Cart(id, product.getName(), product.getPrice(), 1, product.getSellBy());
 
             HttpSession session = request.getSession();
@@ -84,6 +89,7 @@ public class AddToCart extends HttpServlet {
                 response.sendRedirect("products.jsp");
             } else {
                 request.setAttribute("product", product);
+                request.setAttribute("sellName", sellName);
                 request.getRequestDispatcher("product-detail.jsp").forward(request, response);
             }
         }

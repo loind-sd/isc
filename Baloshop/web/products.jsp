@@ -18,15 +18,15 @@
         <!-- Custom CSS -->
         <link rel="stylesheet" href="css/common.css">
         <link rel="stylesheet" href="css/products.css">
-<!--        <style>
-            body{
-                background-image: url('https://wallpaperaccess.com/full/545792.jpg' ); 
-                /*background-size: 200%;*/
-                   
-            }
-        </style>-->
+        <!--        <style>
+                    body{
+                        background-image: url('https://wallpaperaccess.com/full/545792.jpg' ); 
+                        /*background-size: 200%;*/
+                           
+                    }
+                </style>-->
     </head>
-    
+
     <body>
         <%@include file="common/nav.jsp"%>
 
@@ -94,9 +94,9 @@
                             <div class="col-md-12">
                                 <h6>
                                     Sản phẩm
-<!--                                    <span>
-                                        <img src="assets/images/products/cayxanh.png">
-                                    </span>-->
+                                    <!--                                    <span>
+                                                                            <img src="assets/images/products/cayxanh.png">
+                                                                        </span>-->
                                     <span class="float-right sort" style="font-size: 1rem;">
                                         Sắp xếp giá:
                                         <a href="sort?flat=1" class="mr-2 ml-2">Tăng dần</a>
@@ -126,11 +126,20 @@
                                                     <img src="assets/images/products/${i.imageLink}" alt="${i.imageLink}">
                                                 </a>
                                                 <div class="overlay">
-                                                    <p>
-                                                        <a href="addtocart?id=${i.id}">
-                                                            Thêm vào giỏ
-                                                        </a>
-                                                    </p>
+                                                    <c:if test="${i.quantity > 0}">
+                                                        <p>
+                                                            <a href="addtocart?id=${i.id}">
+                                                                Thêm vào giỏ
+                                                            </a>
+                                                        </p>
+                                                    </c:if>
+                                                    <c:if test="${i.quantity <= 0}">
+                                                        <p>
+                                                            <a href="#">
+                                                                Hết hàng
+                                                            </a>
+                                                        </p>
+                                                    </c:if>  
                                                 </div>
                                             </div>
                                             <div class="description text-center">

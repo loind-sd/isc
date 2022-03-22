@@ -21,7 +21,7 @@ import model.CategoryModel;
  * @author 19longdt
  */
 @WebServlet(name = "manageCategory", urlPatterns = {"/manageCategory"})
-public class manageCategory extends HttpServlet {
+public class ManageCategory extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,23 +42,22 @@ public class manageCategory extends HttpServlet {
         Account account = (Account) session.getAttribute("currentLoginAccount");
 
         String name = request.getParameter("catename");
-        try ( PrintWriter out = response.getWriter()) {
-            if (name != null) {
-                CategoryModel c = new CategoryModel();
-                c.addCategory(new Category(name));
 
-                request.setAttribute("message", "Thêm loại hàng mới thành công!");
-                request.setAttribute("page", 5);
-                request.setAttribute("categories", c.getAllCategory());
-                request.getRequestDispatcher("admin-index.jsp").forward(request, response);
-            } else{
-                int cid = Integer.parseInt(request.getParameter("cid"));
-                String cateName = request.getParameter("categoryName");
+        CategoryModel c = new CategoryModel();
+        if (name != null) {
+            c.addCategory(new Category(name));
 
-                System.out.println(cid + " ccc " + cateName);
-
-            }
+            request.setAttribute("message", "Thêm loại hàng mới thành công!");
+            request.setAttribute("page", 5);
+            request.setAttribute("categories", c.getAllCategory());
+            request.getRequestDispatcher("admin-index.jsp").forward(request, response);
+        } else {
+            request.setAttribute("message", "Thêm loại hàng mới thất bại!");
+            request.setAttribute("page", 5);
+            request.setAttribute("categories", c.getAllCategory());
+            request.getRequestDispatcher("admin-index.jsp").forward(request, response);
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

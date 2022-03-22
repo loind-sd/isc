@@ -21,7 +21,7 @@ import model.OrderModel;
  * @author ADMIN
  */
 @WebServlet(name = "confirmOrder", urlPatterns = {"/confirmOrder"})
-public class confirmOrder extends HttpServlet {
+public class ConfirmOrder extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

@@ -35,7 +35,7 @@
                                 <div class="form-group col-md-6">
                                     <input type="text" class="form-control" name="catename" placeholder="Tên loại hàng" required/>
                                 </div>
-                                 <button class="btn btn-success ml-3" type="submit" href="manageCategory">Thêm sản phẩm</button>
+                                <button class="btn btn-success ml-3" type="submit" href="manageCategory">Thêm</button>
                                 <!--<input type="submit" class="btn btn-success ml-3" name="btnUpload" value="Thêm sản phẩm">-->
                             </div>
                         </form>
@@ -54,14 +54,12 @@
     </div>  
     <div class="row mt-2">
         <div class="col-md-12">
-            <form action="manageCategory" method="post" acceptcharset="UTF-8">
-                <table id="products" table class="table table-bordered" cellspacing="0" width="100%">
+            <table id="products" table class="table table-bordered" cellspacing="0" width="100%">
                 <thead>
                     <tr>
                         <th>STT</th>
                         <th>Mã loại hàng</th>
                         <th>Tên loại hàng</th>
-                        <th>Chức năng</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -69,18 +67,13 @@
                     <tr>
                         <td>${no.index+1}</td>
                         <td>${i.id}</td>
-                        <td><input style="width: 100%;" type="text" name="categoryName" value="${i.category}" required /></td>
-                        <td>
-                            <a href="manageCategory?cid=${i.id}" >
-                            <button type="submit">Lưu</button>
-                            </a>
+                        <td><label style="width: 100%;" type="text" name="categoryName" value="${i.category}">${i.category}</label>
                         </td>
                         <!--data-toggle="modal" data-target="#myModal"--> 
                     </tr>
                 </c:forEach>
                 </tbody>
             </table>
-            </form>
         </div>
     </div>
 </div>

@@ -73,7 +73,7 @@ public class OrderModel {
     
     public ArrayList<Order> getOrderById(int accountId){
         ArrayList<Order> list = new ArrayList<>();
-        String query = "SELECT * FROM [Order] WHERE Account_Id = ? AND Status <> -1 AND Status <> 4 AND Status <> 6";
+        String query = "SELECT * FROM [Order] WHERE Account_Id = ? AND Status <> -1 AND Status <> 4 AND Status <> 6 ORDER BY status";
         try {
             connection = MSSQLConnection.getConnection();
             ps = connection.prepareStatement(query);
@@ -132,7 +132,7 @@ public class OrderModel {
     
     public ArrayList<Order> getOrderForSeller(int accId){
         ArrayList<Order> list = new ArrayList<>();
-        String query = "SELECT * FROM [Order] WHERE SellBy = ? AND Status <> 1";
+        String query = "SELECT * FROM [Order] WHERE SellBy = ? AND Status <> 1 ORDER BY status";
         try {
             connection = MSSQLConnection.getConnection();
             ps = connection.prepareStatement(query);
@@ -162,7 +162,7 @@ public class OrderModel {
     
     public ArrayList<Order> getOrderHistoryById(int accountId){
         ArrayList<Order> list = new ArrayList<>();
-        String query = "SELECT * FROM [Order] WHERE Account_Id = ? AND Status = ? OR Account_Id = ? AND Status = ? OR Account_Id = ? AND Status = ?";
+        String query = "SELECT * FROM [Order] WHERE Account_Id = ? AND Status = ? OR Account_Id = ? AND Status = ? OR Account_Id = ? AND Status = ? ORDER BY status";
         try {
             connection = MSSQLConnection.getConnection();
             ps = connection.prepareStatement(query);
