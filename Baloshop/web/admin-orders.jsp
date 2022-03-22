@@ -38,9 +38,9 @@
                         <tr>
                             <td>${no.index+1}</td>
                             <td>${i.id}</td>
-                            <td>Trần Văn Bình</td>
-                            <td>01646352891</td>
-                            <td>44 Nguyễn Văn Cừ, Phường Ngọc Lâm, Quận Long Biên, Hà Nội</td>
+                            <td>${i.name}</td>
+                            <td>${i.phone}</td>
+                            <td>${i.address}</td>
                             <td><fmt:formatNumber type="number" maxFractionDigits="3" value="${i.totalPrice}"/><sup>đ</sup></td>
 
 

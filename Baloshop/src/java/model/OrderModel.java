@@ -50,18 +50,18 @@ public class OrderModel {
         }
         return 0;
     }
-    
+
     public void UpdateOrder(String status, String id) {
         String query = "Update [Order] set Status = ? where Id = ? ";
-        
+
         try {
-            
+
             connection = MSSQLConnection.getConnection();
             ps = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, status);
             ps.setString(2, id);
             int isCheck = ps.executeUpdate();
-            
+
         } catch (SQLException e) {
             System.out.println(e);
         } finally {
@@ -70,8 +70,8 @@ public class OrderModel {
             MSSQLConnection.closeConnection(connection);
         }
     }
-    
-    public ArrayList<Order> getOrderById(int accountId){
+
+    public ArrayList<Order> getOrderById(int accountId) {
         ArrayList<Order> list = new ArrayList<>();
         String query = "SELECT * FROM [Order] WHERE Account_Id = ? AND Status <> -1 AND Status <> 4 AND Status <> 6 ORDER BY status";
         try {
@@ -100,10 +100,12 @@ public class OrderModel {
         }
         return null;
     }
-    
-    public ArrayList<Order> getOrder(){
+
+    public ArrayList<Order> getOrder() {
         ArrayList<Order> list = new ArrayList<>();
-        String query = "SELECT * FROM [Order] order by status";
+        String query = "SELECT a.*, c.Name, c.Phone_Number, c.Address FROM dbo.[Order] a \n"
+                + "INNER JOIN dbo.Account b ON a.Account_Id = b.Id\n"
+                + "INNER JOIN dbo.Account_Detail c ON b.Account_Detail_Id = c.Id order by a.status";
         try {
             connection = MSSQLConnection.getConnection();
             ps = connection.prepareStatement(query);
@@ -115,7 +117,10 @@ public class OrderModel {
                         rs.getString(3),
                         rs.getDouble(4),
                         rs.getString(5),
-                        rs.getInt(6)
+                        rs.getInt(6),
+                        rs.getString(8),
+                        rs.getString(9),
+                        rs.getString(10)
                 );
                 list.add(order);
             }
@@ -129,10 +134,12 @@ public class OrderModel {
         }
         return null;
     }
-    
-    public ArrayList<Order> getOrderForSeller(int accId){
+
+    public ArrayList<Order> getOrderForSeller(int accId) {
         ArrayList<Order> list = new ArrayList<>();
-        String query = "SELECT * FROM [Order] WHERE SellBy = ? AND Status <> 1 ORDER BY status";
+        String query = "SELECT a.*, c.Name, c.Phone_Number, c.Address FROM dbo.[Order] a \n"
+                + "INNER JOIN dbo.Account b ON a.Account_Id = b.Id\n"
+                + "INNER JOIN dbo.Account_Detail c ON b.Account_Detail_Id = c.Id WHERE a.SellBy = ? AND a.Status <> 1 ORDER BY a.status";
         try {
             connection = MSSQLConnection.getConnection();
             ps = connection.prepareStatement(query);
@@ -145,7 +152,10 @@ public class OrderModel {
                         rs.getString(3),
                         rs.getDouble(4),
                         rs.getString(5),
-                        rs.getInt(6)
+                        rs.getInt(6),
+                        rs.getString(8),
+                        rs.getString(9),
+                        rs.getString(10)
                 );
                 list.add(order);
             }
@@ -159,15 +169,15 @@ public class OrderModel {
         }
         return null;
     }
-    
-    public ArrayList<Order> getOrderHistoryById(int accountId){
+
+    public ArrayList<Order> getOrderHistoryById(int accountId) {
         ArrayList<Order> list = new ArrayList<>();
         String query = "SELECT * FROM [Order] WHERE Account_Id = ? AND Status = ? OR Account_Id = ? AND Status = ? OR Account_Id = ? AND Status = ? ORDER BY status";
         try {
             connection = MSSQLConnection.getConnection();
             ps = connection.prepareStatement(query);
             ps.setInt(1, accountId);
-            ps.setInt(2, -1);
+            ps.setInt(2, 7);
             ps.setInt(3, accountId);
             ps.setInt(4, 4);
             ps.setInt(5, accountId);

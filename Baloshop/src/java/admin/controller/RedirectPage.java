@@ -66,10 +66,7 @@ public class RedirectPage extends HttpServlet {
                 case 3:
                     ArrayList<Product> listProduct = null;
                     
-                    if (account.getRoleId() == 1) {
-                        listProduct = new ProductModel().getAllProduct();
-                    } 
-                    else if (account.getRoleId() == 4) {
+                    if (account.getRoleId() == 4) {
                         listProduct = new ProductModel().getProductsBySeller(account.getId());
                     }
                     if(request.getParameter("idProduct") != null){

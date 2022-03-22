@@ -18,6 +18,9 @@ public class Order {
     private String note;
     private int status;
     private int sellBy;
+    private String name;
+    private String phone;
+    private String address;
 
     public Order(int accountId, double totalPrice, String note, int status) {
         this.accountId = accountId;
@@ -42,6 +45,31 @@ public class Order {
         this.note = note;
         this.status = status;
     }
+    
+    public Order(int id, int accountId, String date, double totalPrice, String note, int status, String name, String phone, String address) {
+        this.id = id;
+        this.accountId = accountId;
+        this.date = date;
+        this.totalPrice = totalPrice;
+        this.note = note;
+        this.status = status;
+        this.name = name;
+        this.phone = phone;
+        this.address = address;
+    }
+
+    public Order(int accountId, double totalPrice, String note, int status, int sellBy, String name, String phone, String address) {
+        this.accountId = accountId;
+        this.totalPrice = totalPrice;
+        this.note = note;
+        this.status = status;
+        this.sellBy = sellBy;
+        this.name = name;
+        this.phone = phone;
+        this.address = address;
+    }
+    
+    
 
     public Order() {
     }
@@ -103,6 +131,32 @@ public class Order {
     public void setStatus(int status) {
         this.status = status;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+    
+    
     
     public String getFmDate() {
         String[] str = this.date.split("-");
